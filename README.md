@@ -46,6 +46,38 @@ CREVIXO uses an AWS-based architecture to coordinate media generation, applicati
 | AWS Amplify | Application hosting |
 | AWS IAM | Access control and permissions |
 
+
+### CREVIXO AWS Architecture Diagram
+
+```mermaid
+flowchart TD
+    A["CREVIXO Studio - Next.js / React"]
+    B["Amazon Cognito - Authentication"]
+    C["Application API"]
+    D["Amazon SQS - Job Queue"]
+    E["AWS Lambda - Generation Worker"]
+    F["Amazon Bedrock - AI Models"]
+    G["Amazon DynamoDB - Job Metadata"]
+    H["Amazon S3 - Media Storage"]
+    I["Authorized Media Playback"]
+    J["AWS Amplify - Hosting"]
+
+    J -.-> A
+    A --> B
+    A --> C
+    C --> D
+    D --> E
+    E --> F
+    E --> G
+    E --> H
+    F --> H
+    C --> G
+    A --> I
+    I --> H
+```
+
+*Simplified architecture illustrating CREVIXO's generation workflow. Full end-to-end production integration remains under validation.*
+
 ### Generation Workflow
 
 1. A production request is submitted.
